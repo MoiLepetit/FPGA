@@ -1,49 +1,6 @@
 #include <systemc.h>
 #include "adder.h"
 
-SC_MODULE(Try)
-{
-    sc_out<bool> a,b;
-    sc_in<bool> sum, carry;
-
-    void test()
-    {
-        a.write(0);
-        b.write(0);
-
-        wait(3, SC_NS);
-
-        a.write(0);
-        b.write(1);
-
-        wait(3, SC_NS);
-
-
-
-        a.write(1);
-        b.write(0);
-
-        wait(3, SC_NS);
-
-        a.write(1);
-        b.write(0);
-
-        wait(3, SC_NS);
-
-        
-        a.write(1);
-        b.write(1);
-
-        wait(3, SC_NS);
-
-        sc_stop();
-    }
-
-    SC_CTOR(Try){
-        SC_THREAD(test);
-    }
-};
-
 int sc_main(int argc, char *args[])
 {
     // Init signal in and out
@@ -55,11 +12,35 @@ int sc_main(int argc, char *args[])
     adder.SUM(sum);
     adder.CARRY(carry);
     
-    // Init test simulation
-    a = 1;
-    b = 0;
-    sc_start(1, SC_NS);
-    cout << "SUM = " << sum << ", CARRY = " << carry << endl;
+    // Simulation
+    sc_trace_file* tracefile = sc_create_vcd_trace_file("tracefile");
+    sc_trace(tracefile, a, "a");
+    sc_trace(tracefile, b, "b");
+    sc_trace(tracefile, sum, "sum");
+    sc_trace(tracefile, carry, "carry");
+
+    // Run simulation for all input combinations
+    for (int i = 0; i <= 1; i++) {
+        for (int j = 0; j <= 1; j++) {
+            a = i;
+            b = j;
+
+            sc_start(1, SC_NS);
+
+            cout << "a =   " << a << endl;
+            cout << "b =   " << b << endl;
+            cout << "+------" << endl;
+            cout << "s = " << carry << " " << sum << endl;
+            cout << endl;
+
+            // Assertions
+            assert(sum == (i ^ j));
+            assert(carry == (i && j));
+        }
+    }
+
+    // Cleanup
+    sc_close_vcd_trace_file(tracefile);
 
     return 0; 
 }
