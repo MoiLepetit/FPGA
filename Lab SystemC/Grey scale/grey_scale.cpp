@@ -1,21 +1,26 @@
 #include "grey_scale.h"
 
-void ClockedImageGreyScaler::greyScaleProcess() {
+void GreyScaler::greyScaleProcess() {
+    // Conversion en niveaux de gris (formule simple : moyenne des composantes R, G et B)
+    sc_uint<8> grey = (R.read() + G.read() + B.read()) / 3;
+
+    // Affectation des niveaux de gris à chaque composante
+    GR.write(grey);
+    GG.write(grey);
+    GB.write(grey);
+}
+
+void GreyScaler::clock() {
     while (true) {
-        wait(); // Attente d'un front d'horloge positif
-
-        // Conversion en niveaux de gris (formule simple : moyenne des composantes R, G et B)
-        sc_uint<8> grey = (R.read() + G.read() + B.read()) / 3;
-
-        // Affectation des niveaux de gris à chaque composante
-        GR.write(grey);
-        GG.write(grey);
-        GB.write(grey);
+        CLK.write(!CLK.read());
+        wait(1, SC_NS) ;
     }
 }
 
-ClockedImageGreyScaler::ClockedImageGreyScaler(sc_module_name name)
+GreyScaler::GreyScaler(sc_module_name name)
     : sc_module(name) {
-    SC_THREAD(greyScaleProcess);
-    sensitive << CLK.pos();
+    SC_THREAD(clock);
+    SC_METHOD(greyScaleProcess);
+        sensitive << CLK;
+    CLK.write(0);
 }

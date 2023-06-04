@@ -9,6 +9,7 @@ LDFLAGS = -L. -L$(SYSTEMC_HOME)/lib-linux64 -Wl,-rpath=$(SYSTEMC_HOME)/lib-linux
 
 all:
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -lm -o $(TARGET) $(SOURCE)
+	./$(TARGET)
 
 clean:
 	rm -f $(TARGET)
