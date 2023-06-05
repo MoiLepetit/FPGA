@@ -5,14 +5,10 @@ using namespace sc_dt;
 
 SC_MODULE(Adder)
 {
-    sc_in<bool> A, B;
-    sc_out<bool> SUM; 
-    sc_out<bool>CARRY;
+    sc_in<bool> A, B; // Two bits to add
+    sc_out<bool> SUM, CARRY; // Out of the adder
 
     void add(); // Computing of the sum and the carry
 
-    SC_CTOR(Adder){
-        SC_METHOD(add);
-        sensitive << A << B;
-    }
+    SC_CTOR(Adder);
 };

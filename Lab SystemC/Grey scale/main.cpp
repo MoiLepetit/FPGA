@@ -24,7 +24,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Lire une image depuis un fichier
     cout << "Read image : " << endl;
-    const char* filename = "img/cat.bmp";
+    const char* filename = "img/what.bmp";
     Image image;
     if (!read_image(filename, image)) {
         std::cerr << "Impossible to read the image file." << std::endl;

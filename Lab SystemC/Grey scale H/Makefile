@@ -1,8 +1,8 @@
 SYSTEMC_HOME = /usr/local/systemc-2.3.3/
 
-TARGET = adder
-SOURCE = main.cpp adder.cpp
-HEADERS = adder.h
+TARGET = grey_scale
+SOURCE = main.cpp grey_scale.cpp image.cpp
+HEADERS = image.h grey_scale.h read_image.h save_image.h
 
 CXX = g++ 
 CXXFLAGS = -I. -I$(SYSTEMC_HOME)/include

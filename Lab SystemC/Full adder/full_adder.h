@@ -11,8 +11,5 @@ SC_MODULE(FullAdder)
 
     void full_add(); // Computing of the sum and the carry
 
-    SC_CTOR(FullAdder){
-        SC_METHOD(full_add);
-        sensitive << A << B << C;
-    }
+    SC_CTOR(FullAdder);
 };

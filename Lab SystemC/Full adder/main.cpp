@@ -12,13 +12,35 @@ int sc_main(int argc, char *args[])
     full_adder.C(c);
     full_adder.SUM(sum);
     full_adder.CARRY(carry);
+
+    // Simulation
+    sc_trace_file* tracefile = sc_create_vcd_trace_file("tracefile");
+    sc_trace(tracefile, a, "a");
+    sc_trace(tracefile, b, "b");
+    sc_trace(tracefile, c, "c");
+    sc_trace(tracefile, sum, "sum");
+    sc_trace(tracefile, carry, "carry");
+
+    for (int i = 0; i <= 1; i++) {
+        for (int j = 0; j <= 1; j++) {
+            for (int k = 0; k <= 1; k++) {
+                // Init test simulation
+                a = i;
+                b = j;
+                c = k;
+                sc_start(1, SC_NS);
+                cout << "c =   " << c << endl;
+                cout << "a =   " << a << endl;
+                cout << "b =   " << b << endl;
+                cout << "+------" << endl;
+                cout << "s = " << carry << " " << sum << endl;
+                cout << endl;
+            }
+        }
+    }
     
-    // Init test simulation
-    a = 1;
-    b = 1;
-    c = 1;
-    sc_start(1, SC_NS);
-    cout << "SUM = " << sum << ", CARRY = " << carry << endl;
+    // Cleanup
+    sc_close_vcd_trace_file(tracefile);
 
     return 0; 
 }
