@@ -1,0 +1,45 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Thu Jun  8 11:44:44 2023
+[*]
+[dumpfile] "/home/colin/Documents/FPGA/FPGA/Lab SystemC/Nbit adder/tracefile.vcd"
+[dumpfile_mtime] "Thu Jun  8 11:32:20 2023"
+[dumpfile_size] 1428
+[savefile] "/home/colin/Documents/FPGA/FPGA/Lab SystemC/Nbit adder/TraceFile/Nbit Adder.gtkw"
+[timestart] 0
+[size] 1848 1016
+[pos] -39 -39
+*-8.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 233
+[signals_width] 250
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@28
+SystemC.a0
+SystemC.a1
+SystemC.a2
+SystemC.a3
+SystemC.a4
+SystemC.a5
+SystemC.a6
+SystemC.a7
+SystemC.b0
+SystemC.b1
+SystemC.b2
+SystemC.b3
+SystemC.b4
+SystemC.b5
+SystemC.b6
+SystemC.b7
+SystemC.carry
+SystemC.sum0
+SystemC.sum1
+SystemC.sum2
+SystemC.sum3
+SystemC.sum4
+SystemC.sum5
+SystemC.sum6
+@29
+SystemC.sum7
+[pattern_trace] 1
+[pattern_trace] 0
