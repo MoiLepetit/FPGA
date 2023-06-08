@@ -25,7 +25,7 @@ int sc_main(int argc, char *args[])
             a = i;
             b = j;
 
-            sc_start(1, SC_SEC);
+            sc_start(1, SC_NS);
 
             cout << "a =   " << a << endl;
             cout << "b =   " << b << endl;
@@ -34,8 +34,8 @@ int sc_main(int argc, char *args[])
             cout << endl;
 
             // Assertions
-            assert(sum == (i ^ j));
-            assert(carry == (i && j));
+            sc_assert(sum == (i ^ j));
+            sc_assert(carry == (i && j));
         }
     }
 

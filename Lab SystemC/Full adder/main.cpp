@@ -13,14 +13,15 @@ int sc_main(int argc, char *args[])
     full_adder.SUM(sum);
     full_adder.CARRY(carry);
 
-    // Simulation
+    // TraceFile
     sc_trace_file* tracefile = sc_create_vcd_trace_file("tracefile");
     sc_trace(tracefile, a, "a");
     sc_trace(tracefile, b, "b");
     sc_trace(tracefile, c, "c");
     sc_trace(tracefile, sum, "sum");
     sc_trace(tracefile, carry, "carry");
-
+    
+    // Simulation
     for (int i = 0; i <= 1; i++) {
         for (int j = 0; j <= 1; j++) {
             for (int k = 0; k <= 1; k++) {

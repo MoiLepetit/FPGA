@@ -1,4 +1,6 @@
 #include <systemc.h>
+#include <random>
+#include <string>
 #include "nb_adder.h"
 
 int sc_main(int argc, char* argv[]) {
@@ -16,26 +18,54 @@ int sc_main(int argc, char* argv[]) {
   nba.carry(carry);
   nba.tmp(tmp);
 
-  // Simulation de test
-  a[0].write(1);
-  a[1].write(1);
-  a[2].write(1);
-  a[3].write(1);
-  a[4].write(1);
-  a[5].write(1);
-  a[6].write(1);
-  a[7].write(1);
+  // TraceFile
+  sc_trace_file* tracefile = sc_create_vcd_trace_file("tracefile");
+  for (int i = 0; i < N; i++){
+    sc_trace(tracefile, a[i], "a"+std::to_string(i));
+    sc_trace(tracefile, b[i], "b"+std::to_string(i));
+    sc_trace(tracefile, sum[i], "sum"+std::to_string(i));
+  }
+  sc_trace(tracefile, carry, "carry");
 
-  b[0].write(1);
-  b[1].write(0);
-  b[2].write(1);
-  b[3].write(0);
-  b[4].write(0);
-  b[5].write(0);
-  b[6].write(0);
-  b[7].write(0);
+  // Simulation of random test
+  bool a_tmp[N];
+  bool b_tmp[N];
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<int> dis(0, 1);
+
+  for (int i = 0; i < N; i++) {
+    a_tmp[i] = dis(gen);
+    b_tmp[i] = dis(gen);
+  }
+
+  for (int i = 0; i < N; i++){
+    a[(N-1)-i].write(a_tmp[i]);
+    b[(N-1)-i].write(b_tmp[i]);
+  }
 
   sc_start(1, SC_NS);
+
+  // Assertion
+  bool expected_sum[N];
+  bool expected_carry;
+
+  // First bit and carry
+  expected_sum[0] = a[0] ^ b[0];
+  expected_carry = a[0] & b[0];
+
+  for (int i = 1; i < N; i++) {
+    expected_sum[i] = a[i] ^ b[i] ^ expected_carry;
+    expected_carry = (a[i] & b[i]) | (expected_carry & (a[i] ^ b[i])); 
+  }
+
+  // Check the assertion
+  for (int i = 0; i < N; i++) {
+    sc_assert(sum[i] == expected_sum[i]);
+  }
+  sc_assert(carry == expected_carry);
+
+  sc_close_vcd_trace_file(tracefile);
 
   cout << "a =   ";
   for (int i = N - 1; i >= 0; i--) {

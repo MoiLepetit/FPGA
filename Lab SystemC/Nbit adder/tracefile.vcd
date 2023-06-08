@@ -1,0 +1,74 @@
+$date
+     Jun 08, 2023       13:32:20
+$end
+
+$version
+ SystemC 2.3.3-Accellera --- May 25 2023 12:22:42
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire    1  aaaaa  a0       $end
+$var wire    1  aaaab  b0       $end
+$var wire    1  aaaac  sum0       $end
+$var wire    1  aaaad  a1       $end
+$var wire    1  aaaae  b1       $end
+$var wire    1  aaaaf  sum1       $end
+$var wire    1  aaaag  a2       $end
+$var wire    1  aaaah  b2       $end
+$var wire    1  aaaai  sum2       $end
+$var wire    1  aaaaj  a3       $end
+$var wire    1  aaaak  b3       $end
+$var wire    1  aaaal  sum3       $end
+$var wire    1  aaaam  a4       $end
+$var wire    1  aaaan  b4       $end
+$var wire    1  aaaao  sum4       $end
+$var wire    1  aaaap  a5       $end
+$var wire    1  aaaaq  b5       $end
+$var wire    1  aaaar  sum5       $end
+$var wire    1  aaaas  a6       $end
+$var wire    1  aaaat  b6       $end
+$var wire    1  aaaau  sum6       $end
+$var wire    1  aaaav  a7       $end
+$var wire    1  aaaaw  b7       $end
+$var wire    1  aaaax  sum7       $end
+$var wire    1  aaaay  carry       $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+0aaaaa
+0aaaab
+0aaaac
+0aaaad
+0aaaae
+0aaaaf
+0aaaag
+1aaaah
+1aaaai
+1aaaaj
+1aaaak
+0aaaal
+0aaaam
+0aaaan
+1aaaao
+1aaaap
+1aaaaq
+0aaaar
+1aaaas
+0aaaat
+0aaaau
+1aaaav
+1aaaaw
+1aaaax
+1aaaay
+$end
+
+#1000
